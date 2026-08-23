@@ -1,0 +1,17 @@
+# Scratch and test files
+scratch/
+scratch_chrome_profile/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Backups
+assets/frames_backup_*/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.log

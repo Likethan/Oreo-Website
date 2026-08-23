@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/vendor/babel.min.js"></script>
+</head>
+<body>
+<script>
+try {
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var inFile = fso.OpenTextFile("js/reactApp.js", 1);
+  var code = inFile.ReadAll();
+  inFile.Close();
+
+  var transformed = Babel.transform(code, { presets: ['react', 'env'] }).code;
+
+  var outFile = fso.CreateTextFile("js/reactApp.compiled.js", true, false);
+  outFile.Write(transformed);
+  outFile.Close();
+
+  window.close();
+} catch (e) {
+  var errFile = fso.CreateTextFile("transpile_error.txt", true);
+  errFile.WriteLine(e.message || e.description || String(e));
+  errFile.Close();
+  window.close();
+}
+</script>
+</body>
+</html>

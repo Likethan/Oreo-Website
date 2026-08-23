@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OREO — TWIST. DIP. LOVE. | Interactive Cinematic React Experience</title>
+  <meta name="description" content="Immerse yourself in the cinematic world of Oreo. Discover the ritual: Twist, Dip, Love. 60 FPS butter-smooth scroll frame animation, interactive twist physics, flavors, and recipes.">
+  <meta name="theme-color" content="#00205B">
+
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23110E0C' stroke='%230056B3' stroke-width='4'/><circle cx='50' cy='50' r='38' fill='none' stroke='%23FFFFFF' stroke-width='3' stroke-dasharray='6 4'/><text x='50' y='57' font-family='Arial Black, sans-serif' font-size='18' font-weight='900' fill='%23FFFFFF' text-anchor='middle' letter-spacing='2'>OREO</text></svg>">
+
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN with Custom Theme -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'oreo-blue-dark': '#001233',
+            'oreo-blue-midnight': '#001845',
+            'oreo-blue-primary': '#00205B',
+            'oreo-blue-vibrant': '#003882',
+            'oreo-blue-electric': '#0070F3',
+            'oreo-blue-cyan': '#00D4FF',
+            'obsidian': '#0A0908',
+            'creme': '#FFFDD0',
+            'flavor-strawberry': '#FF4D79',
+            'flavor-mint': '#00E599',
+            'flavor-golden': '#E5B25D',
+            'flavor-birthday': '#FF6584',
+          },
+          fontFamily: {
+            heading: ['Syne', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons (Local + CDN Fallback) -->
+  <script src="js/vendor/lucide.min.js"></script>
+  <script>if (!window.lucide) document.write('<script src="https://unpkg.com/lucide@latest"><\/script>');</script>
+
+  <!-- React 18 & ReactDOM (Local + CDN Fallback) -->
+  <script src="js/vendor/react.min.js"></script>
+  <script>if (!window.React) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"><\/script>');</script>
+  
+  <script src="js/vendor/react-dom.min.js"></script>
+  <script>if (!window.ReactDOM) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"><\/script>');</script>
+
+  <!-- Babel Standalone (Local + CDN Fallback) -->
+  <script src="js/vendor/babel.min.js"></script>
+  <script>if (!window.Babel) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"><\/script>');</script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="bg-obsidian text-creme overflow-x-hidden select-none">
+  <!-- React Root Container -->
+  <div id="root">
+    <!-- Immediate Pre-mount Loading Experience (eliminates any black screen) -->
+    <div id="app-preloader" class="fixed inset-0 z-50 bg-[#f8ed55] flex flex-col items-center justify-center gap-4 transition-opacity duration-300">
+      <div class="w-16 h-16 rounded-full border-4 border-obsidian/20 border-t-obsidian animate-spin"></div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-heading font-black text-2xl text-obsidian tracking-widest">OREO</span>
+        <span class="font-mono text-xs tracking-widest text-obsidian/80 uppercase font-bold">INITIALIZING CINEMATIC EXPERIENCE...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Error Logger Banner -->
+  <div id="error-boundary-banner" class="hidden fixed bottom-4 left-4 right-4 z-50 p-4 bg-red-900/95 text-white rounded-2xl border border-red-500 font-mono text-xs shadow-2xl"></div>
+  <script>
+    window.addEventListener('error', function(e) {
+      console.error('App Runtime Notice:', e);
+      var banner = document.getElementById('error-boundary-banner');
+      if (banner && (!window.React || !document.querySelector('#home'))) {
+        banner.classList.remove('hidden');
+        banner.innerHTML = '<strong class="text-red-300">Notice:</strong> ' + (e.message || 'Script evaluation pending...') + ' <span class="text-white/60">(' + (e.filename ? e.filename.split("/").pop() : "") + ')</span>';
+      }
+    });
+  </script>
+
+  <!-- Main React Application Script with explicit React preset -->
+  <script type="text/babel" data-presets="env,react" src="js/reactApp.js"></script>
+</body>
+</html>

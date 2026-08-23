@@ -1,0 +1,474 @@
+/* ==========================================================================
+   OREO CINEMATIC UI COMPONENTS & STYLING
+   ========================================================================== */
+
+/* Custom Magnetic Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--creme-pure);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s ease-out, background-color 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.3s ease,
+              background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-label {
+  color: var(--obsidian-black);
+  font-weight: 800;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Cursor State Variations */
+body.cursor-hover .cursor-ring {
+  width: 72px;
+  height: 72px;
+  border-color: var(--oreo-blue-cyan);
+  background-color: rgba(0, 112, 243, 0.15);
+  backdrop-filter: blur(2px);
+}
+
+body.cursor-drag .cursor-ring {
+  width: 86px;
+  height: 86px;
+  background-color: var(--creme-pure);
+  border-color: var(--creme-pure);
+}
+
+body.cursor-drag .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+body.cursor-click .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.4);
+}
+
+/* Page Iris Aperture Transition */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page-transition.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.transition-iris {
+  position: absolute;
+  width: 200vmax;
+  height: 200vmax;
+  background: radial-gradient(circle, #00205B 0%, #001233 60%, #0A0908 100%);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.page-transition.active .transition-iris {
+  transform: scale(1);
+}
+
+.transition-text {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+}
+
+.page-transition.active .transition-text {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Header & Navigation */
+#main-header.scrolled {
+  background-color: rgba(10, 18, 40, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border-radius: 9999px;
+}
+
+.nav-link:hover {
+  color: var(--creme-pure);
+}
+
+.nav-link.active {
+  color: var(--creme-pure);
+  background-color: rgba(0, 112, 243, 0.35);
+  box-shadow: inset 0 0 12px rgba(0, 112, 243, 0.5), 0 0 15px rgba(0, 112, 243, 0.3);
+}
+
+/* Hero Scroll-Driven Video Frame Scrubbing Container */
+.hero-scrub-track {
+  position: relative;
+  width: 100%;
+  height: 280vh; /* Extended track to divide scroll into precise frame stages */
+}
+
+.hero-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) scale(1.02);
+  object-fit: cover;
+  z-index: 1;
+  filter: contrast(1.08) brightness(0.92);
+  will-change: transform;
+}
+
+.hero-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(circle at center, rgba(0, 32, 91, 0.2) 0%, rgba(10, 9, 8, 0.72) 70%, rgba(10, 9, 8, 0.98) 100%);
+  pointer-events: none;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+
+/* Phase Overlays on Top of Scrubbed Video */
+.scrub-phase-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(25px) scale(0.96);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrub-phase-layer.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Frame Scrub Telemetry Pill */
+.frame-telemetry-pill {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20;
+  background: rgba(10, 18, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--creme-pure);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Interactive Oreo Cookie Component */
+.oreo-cookie-interactive {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  user-select: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.oreo-cookie-interactive:active {
+  cursor: grabbing;
+}
+
+.cookie-wafer-top {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2a2420, #14110f 70%, #0d0b0a 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.8),
+    0 15px 35px rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  transition: transform 0.1s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie-creme-layer {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #ffffff, #f7f6f0 65%, #eae6d4 100%);
+  box-shadow: 
+    inset 0 3px 6px rgba(255, 255, 255, 0.9),
+    0 6px 16px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cookie-wafer-bottom {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #221d19, #110e0c 70%, #080706 100%);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+
+/* Wafer Embossed Details Pattern */
+.cookie-emboss-pattern {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  border: 3px dashed rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie-emboss-pattern::after {
+  content: "OREO";
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.22);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8), -1px -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Flavor Cards & Gallery */
+.flavor-card {
+  position: relative;
+  background: rgba(18, 16, 14, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  padding: 2.5rem;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+}
+
+.flavor-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 35px var(--card-glow, rgba(0, 112, 243, 0.3));
+}
+
+.flavor-cookie-visual {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flavor-card:hover .flavor-cookie-visual {
+  transform: rotate(25deg) scale(1.12);
+}
+
+/* Recipe Cards */
+.recipe-card {
+  background: rgba(18, 16, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 112, 243, 0.5);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 112, 243, 0.25);
+}
+
+.recipe-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.recipe-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.recipe-card:hover .recipe-card-img {
+  transform: scale(1.08);
+}
+
+/* Modals */
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop.active .modal-card {
+  animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Experience 5-Stage Timeline Track */
+.experience-step-indicator {
+  width: 3px;
+  background: linear-gradient(to bottom, var(--oreo-blue-electric), transparent);
+}
+
+/* Milk Dunk Glass Container in The Twist Page */
+.milk-glass-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #edf2f7 50%, #cbd5e1 100%);
+  box-shadow: 
+    inset 0 10px 20px rgba(255, 255, 255, 0.8),
+    inset 0 -15px 30px rgba(0, 0, 0, 0.2),
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 45px rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.milk-surface-wave {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 40%;
+  animation: waveRotate 8s linear infinite;
+}
+
+@keyframes waveRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Interactive Trivia Quiz Option */
+.quiz-option-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quiz-option-btn:hover {
+  background: rgba(0, 112, 243, 0.2);
+  border-color: var(--oreo-blue-electric);
+  transform: translateX(6px);
+}
+
+.quiz-option-btn.selected {
+  background: var(--oreo-blue-electric);
+  border-color: var(--oreo-blue-cyan);
+  color: white;
+}
