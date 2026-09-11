@@ -26,6 +26,6 @@ jobs:
         run: |
           mkdir -p .github/automation
           printf 'Last automated update: %s\n' "$(date -u '+%Y-%m-%d %H:%M:%S UTC')" > .github/automation/activity.log
-          git add .github/automation/activity.log
+          git add -f .github/automation/activity.log
           git commit -m "chore: daily activity update" || exit 0
           git push
