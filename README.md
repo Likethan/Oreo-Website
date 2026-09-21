@@ -16,7 +16,7 @@
 ### 🎬 1. 300-Frame Cinematic Scroll Experience (`Experience`)
 - **Butter-Smooth Frame Scroller**: Synchronized 300-frame sequence rendered onto high-DPI HTML5 canvas using optimized WebP & JPG fallbacks.
 - **Story-Driven Ritual**: As you scroll, witness the cookie fly apart, reveal the velvet creme, take a plunge into fresh milk, and snap back into place.
-- **Adaptive Quality**: Instant pre-caching ensures zero dropped frames across all display refresh rates (60Hz / 120Hz / 144Hz).
+- **Adaptive Quality**: Progressive frame pre-caching is tuned for smooth playback across common 60Hz, 120Hz, and 144Hz displays.
 
 ### 🌀 2. Interactive Cookie Twist Laboratory (`The Twist Lab`)
 - **Physics Simulation**: Drag and twist the cookie halves in real-time with responsive mouse and touch physics.
@@ -49,7 +49,7 @@
 
 ## 🚀 Quick Start & Local Setup
 
-This project is built to run smoothly with zero heavy build steps required!
+This project is designed to run locally with a lightweight development setup.
 
 ### Method 1: Using the Included Python Server (Recommended)
 
