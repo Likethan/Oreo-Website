@@ -1,0 +1,4 @@
+# Python dependencies for Oreo Website
+# Used by frame extraction and image sequence optimization scripts
+Pillow>=10.0.0
+opencv-python>=4.8.0
